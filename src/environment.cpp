@@ -60,7 +60,7 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
         if (segmentWallCloud.second->points.size() >= 200)
         {
             tmpCloud = segmentWallCloud;
-            renderPointCloud(viewer, segmentWallCloud.second, "wallPlaneCloud" + wallIndex, Color(1,1,0));
+            // renderPointCloud(viewer, segmentWallCloud.second, "wallPlaneCloud" + wallIndex, Color(1,1,0));
             wallIndex++;
             if (wallIndex >= 3)
             {
@@ -161,7 +161,7 @@ void initCamera(CameraAngle setAngle, pcl::visualization::PCLVisualizer::Ptr& vi
         viewer->addCoordinateSystem (1.0);
 }
 
-// #define SHOW_RAW
+#define SHOW_RAW
 
 int main (int argc, char** argv)
 {
