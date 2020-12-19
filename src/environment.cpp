@@ -44,11 +44,11 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
     /* Print the box and voxel processing */
     Box box = {-3, -2, -1, 3, 2, 1};
     renderBox(viewer, box, 500, Color(0, 0.5, 0.5));
-    cloudFiltered = pointProcessorI->FilterCloud(inputCloud, 0.3f, Eigen::Vector4f(-30, -10, -5, 1), Eigen::Vector4f(30, 10, 10, 1));
+    cloudFiltered = pointProcessorI->FilterCloud(inputCloud, 0.3f, Eigen::Vector4f(-30, -5, -5, 1), Eigen::Vector4f(30, 7.5, 10, 1));
 
     /* Plane segment */
     // get the ground plane out
-    std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> segmentCloud = pointProcessorI->SegmentPlane(cloudFiltered, 100, 0.2, false);
+    std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> segmentCloud = pointProcessorI->SegmentPlane(cloudFiltered, 200, 0.4, false);
     renderPointCloud(viewer, segmentCloud.second, "planeCloud", Color(0,1,0));
     // get all the wall out
     bool cloudWall = true;
@@ -76,7 +76,7 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
 
 #if 1
     /* Clustering */
-    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(tmpCloud.first, 1.0, 10, 500);
+    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(tmpCloud.first, 0.7, 10, 300);
     // rendering
     std::vector<Color> colors = {Color(1,0,0), Color(1,1,0), Color(0,0,1)};
     int clusterId = 0;
