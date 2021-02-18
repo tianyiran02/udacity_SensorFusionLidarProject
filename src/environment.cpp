@@ -51,7 +51,7 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
     std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> segmentCloud = pointProcessorI->SegmentPlane(cloudFiltered, 200, 0.4, false);
     renderPointCloud(viewer, segmentCloud.second, "planeCloud", Color(0,1,0));
     // get all the wall out
-    bool cloudWall = true;
+    bool cloudWall = false;
     int wallIndex = 1;
     std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> tmpCloud = segmentCloud;
     while (cloudWall == true)
@@ -76,7 +76,7 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
 
 #if 1
     /* Clustering */
-    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(tmpCloud.first, 0.7, 10, 300);
+    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(tmpCloud.first, 1.0, 10, 300);
     // rendering
     std::vector<Color> colors = {Color(1,0,0), Color(1,1,0), Color(0,0,1)};
     int clusterId = 0;

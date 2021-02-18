@@ -19,6 +19,8 @@
 #include <chrono>
 #include "render/box.h"
 
+#include <unordered_set>
+#include "kdtree.h"
 template<typename PointT>
 class ProcessPointClouds {
 public:
@@ -47,6 +49,7 @@ public:
     typename pcl::PointCloud<PointT>::Ptr loadPcd(std::string file);
 
     std::vector<boost::filesystem::path> streamPcd(std::string dataPath);
-  
+
+    void proxyPoints(std::vector<int>& pointCluster, std::unordered_set<int>& pointLog, const std::vector<std::vector<float>> points, KdTree* tree, float distanceTol, int index);
 };
 #endif /* PROCESSPOINTCLOUDS_H_ */
